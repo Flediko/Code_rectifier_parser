@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Audit & Refactor Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>CompAnalysis</h2>
+        
+        <div class="control-group">
+            <label for="language-select">Target Language</label>
+            <select id="language-select">
+                <option value="C">C (Standard)</option>
+                <option value="C++">C++ (Enhanced)</option>
+                <option value="Python" selected>Python (PEP 8)</option>
+            </select>
+        </div>
+
+        <div class="info-box" id="lang-info">
+            Mode: Python Analysis
+        </div>
+
+        <button id="analyze-btn" class="primary-btn">▶️ Start Compilation</button>
+        <button id="refactor-btn" class="secondary-btn">✨ Auto-Refactor</button>
+        <button id="clean-btn" class="secondary-btn">🗑️ Remove Comments</button>
+
+        <div class="compiler-phases">
+            <h3>🔍 Compiler Phases</h3>
+            <ul>
+                <li><strong>Lexical:</strong> Tokenization</li>
+                <li><strong>Syntax:</strong> Parsing/Structure</li>
+                <li><strong>Semantic:</strong> Symbol Table/Scope</li>
+                <li><strong>Optimization:</strong> Refactoring</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>🛠️ Static Code Analyzer</h1>
+            <p>Compiler Design Project: Lexical, Syntax, & Semantic Analysis</p>
+        </header>
+
+        <div class="editor-container">
+            <div class="editor-header">Source Editor</div>
+            <textarea id="code-editor" spellcheck="false"></textarea>
+        </div>
+
+        <div class="output-section">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="lexical">📝 Lexical</button>
+                <button class="tab-btn" data-tab="syntax">🏗️ Syntax/Semantic</button>
+                <button class="tab-btn" data-tab="symbols">📊 Symbol Table</button>
+                <button class="tab-btn" data-tab="errors">❌ Errors</button>
+            </div>
+
+            <div class="tab-content active" id="lexical">
+                <div class="table-wrapper">
+                    <table id="tokens-table">
+                        <thead><tr><th>Type</th><th>Value</th><th>Line</th></tr></thead>
+                        <tbody><tr><td colspan="3">Run compilation to see tokens...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="syntax">
+                <div id="syntax-status" class="status-box">Ready to analyze...</div>
+            </div>
+
+            <div class="tab-content" id="symbols">
+                <div class="table-wrapper">
+                    <table id="symbol-table">
+                        <thead><tr><th>Name</th><th>Type</th><th>Scope</th><th>Line</th></tr></thead>
+                        <tbody><tr><td colspan="4">No symbols yet...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="errors">
+                <div id="issues-list">No issues detected yet.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Refactored Code -->
+    <div id="code-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Refactored Code</h2>
+            <textarea id="refactored-output" readonly></textarea>
+            <button id="copy-btn">Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
